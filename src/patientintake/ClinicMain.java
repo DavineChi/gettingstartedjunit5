@@ -1,6 +1,8 @@
 package patientintake;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class ClinicMain {
@@ -9,7 +11,7 @@ public class ClinicMain {
 	
 	public static void main(String[] args) throws Throwable {
 		
-		calendar = new ClinicCalendar();
+		calendar = new ClinicCalendar(LocalDate.now());
 		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Welcome to the Patient Intake System!");
@@ -33,6 +35,7 @@ public class ClinicMain {
 		System.out.println("Please select an option:");
 		System.out.println("1. Enter a Patient Appointment");
 		System.out.println("2. View All Appointments");
+		System.out.println("3. View Today's Appointments");
 		System.out.println("X. Exit System");
 		System.out.println("Option: ");
 		
@@ -45,7 +48,10 @@ public class ClinicMain {
 				
 			case "2": performAllAppointments();
 				return option;
-				
+
+			case "3": performTodayAppointments();
+				return option;
+
 			case "x":
 				return option;
 				
@@ -62,6 +68,7 @@ public class ClinicMain {
 		String doc = "";
 		
 		scanner.nextLine();
+		
 		System.out.println();
 		System.out.println();
 		System.out.println("Please enter appointment info:");
@@ -89,6 +96,7 @@ public class ClinicMain {
 		catch (Throwable th) {
 			
 			System.out.println("Error: " + th.getMessage());
+			
 			return;
 		}
 		
@@ -117,5 +125,32 @@ public class ClinicMain {
 		System.in.read();
 		System.out.println();
 		System.out.println();
+	}
+	
+	private static void performTodayAppointments() throws Throwable {
+		
+		System.out.println();
+		System.out.println();
+		System.out.println("Appointments for today:");
+		
+		listAppointments(calendar.getTodayAppointments());
+		
+		System.out.println();
+		System.out.println("Press any key to continue...");
+		System.in.read();
+		System.out.println();
+		System.out.println();
+	}
+	
+	private static void listAppointments(List<PatientAppointment> appointments) {
+		
+		for (PatientAppointment appointment : appointments) {
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a");
+			String apptTime = formatter.format(appointment.getAppointmentDateTime());
+			
+			System.out.println(String.format("%s:  %s, %s\t\tDoctor: %s", apptTime, appointment.getPatientLastName(),
+					appointment.getPatientFirstName(), appointment.getDoctor().getName()));
+		}
 	}
 }
