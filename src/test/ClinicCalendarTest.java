@@ -28,9 +28,8 @@ class ClinicCalendarTest {
 		
 		Assertions.assertEquals("Shannon", enteredAppt.getPatientFirstName());
 		Assertions.assertEquals("Fisher", enteredAppt.getPatientLastName());
-		Assertions.assertEquals(Doctor.avery, enteredAppt.getDoctor());
-		Assertions.assertEquals("3/26/2019 06:00 PM",
-				enteredAppt.getAppointmentDateTime().format(DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a")));
+		Assertions.assertEquals(Doctor.AVERY, enteredAppt.getDoctor());
+		Assertions.assertEquals("3/26/2019 06:00 PM", enteredAppt.getAppointmentDateTime().format(DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a")));
 		
 		
 	}
