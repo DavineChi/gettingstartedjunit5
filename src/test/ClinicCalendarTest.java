@@ -17,7 +17,7 @@ class ClinicCalendarTest {
 		
 		ClinicCalendar calendar = new ClinicCalendar();
 		
-		calendar.addAppointment("Shannon", "Fisher", "avery", "3/26/2019 06:00 PM");
+		calendar.addAppointment("Shannon", "Fisher", "AVERY", "3/26/2019 06:00 PM");
 		
 		List<PatientAppointment> appointments = calendar.getAppointments();
 		

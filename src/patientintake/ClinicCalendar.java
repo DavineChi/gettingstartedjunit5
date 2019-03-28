@@ -17,7 +17,7 @@ public class ClinicCalendar {
 	
 	public void addAppointment(String patientFirstName, String patientLastName, String doctorKey, String dateTime) {
 		
-		Doctor doctor = Doctor.valueOf(doctorKey.toLowerCase());
+		Doctor doctor = Doctor.valueOf(doctorKey.toUpperCase());
 		LocalDateTime localDateTime;
 		
 		try {
